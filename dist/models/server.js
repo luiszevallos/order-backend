@@ -24,10 +24,11 @@ class Server {
         this.port = ((_a = process === null || process === void 0 ? void 0 : process.env) === null || _a === void 0 ? void 0 : _a.PORT) || "3000";
         this.paths = {
             auth: "/api/auth",
-            users: "/api/users",
+            categories: "/api/categories",
+            customers: "/api/customers",
             orders: "/api/orders",
             products: "/api/products",
-            customers: "/api/customers",
+            users: "/api/users",
         };
         this.connection();
         this.middlewares();
@@ -55,10 +56,11 @@ class Server {
     }
     routes() {
         this.app.use(this.paths.auth, routes_1.authRoutes);
-        this.app.use(this.paths.users, routes_1.userRoutes);
+        this.app.use(this.paths.categories, routes_1.categoryRoutes);
         this.app.use(this.paths.customers, routes_1.customerRoutes);
-        this.app.use(this.paths.products, routes_1.productRoutes);
         this.app.use(this.paths.orders, routes_1.orderRoutes);
+        this.app.use(this.paths.products, routes_1.productRoutes);
+        this.app.use(this.paths.users, routes_1.userRoutes);
     }
     listen() {
         this.app.listen(this.port, () => {

@@ -48,4 +48,4 @@ UserSchema.methods.toJSON = function () {
     return Object.assign(Object.assign({}, user), { uid: _id });
 };
 exports.default = (0, mongoose_1.model)("User", UserSchema);
-//# sourceMappingURL=user-model.js.map
+//# sourceMappingURL=user-model%20copy.js.map

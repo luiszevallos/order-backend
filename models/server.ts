@@ -3,6 +3,7 @@ import cors from "cors";
 //
 import {
   authRoutes,
+  categoryRoutes,
   customerRoutes,
   orderRoutes,
   productRoutes,
@@ -15,10 +16,11 @@ class Server {
   private port: string;
   private paths: {
     auth: string;
-    users: string;
+    categories: string;
+    customers: string;
     orders: string;
     products: string;
-    customers: string;
+    users: string;
   };
 
   constructor() {
@@ -26,10 +28,11 @@ class Server {
     this.port = process?.env?.PORT || "3000";
     this.paths = {
       auth: "/api/auth",
-      users: "/api/users",
+      categories: "/api/categories",
+      customers: "/api/customers",
       orders: "/api/orders",
       products: "/api/products",
-      customers: "/api/customers",
+      users: "/api/users",
     };
 
     this.connection();
@@ -60,10 +63,11 @@ class Server {
 
   routes() {
     this.app.use(this.paths.auth, authRoutes);
-    this.app.use(this.paths.users, userRoutes);
+    this.app.use(this.paths.categories, categoryRoutes);
     this.app.use(this.paths.customers, customerRoutes);
-    this.app.use(this.paths.products, productRoutes);
     this.app.use(this.paths.orders, orderRoutes);
+    this.app.use(this.paths.products, productRoutes);
+    this.app.use(this.paths.users, userRoutes);
   }
 
   listen() {

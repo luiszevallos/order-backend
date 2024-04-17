@@ -66,7 +66,7 @@ const postUser = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     user.password = (0, crypt_1.setBCrypt)(password);
     yield user.save();
     res.status(201).json({
-        message: "Crear usuario exitoso!",
+        message: "Creación de usuario exitoso!",
         data: {
             user,
         },

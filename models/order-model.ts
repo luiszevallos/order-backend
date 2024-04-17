@@ -21,9 +21,14 @@ const UserSchema = new Schema({
   image: {
     type: String,
   },
-  role: {
+  customer: {
     type: Schema.Types.ObjectId,
-    ref: "Role",
+    ref: "Customer",
+    required: true,
+  },
+  customer: {
+    type: Schema.Types.ObjectId,
+    ref: "Customer",
     required: true,
   },
   status: {

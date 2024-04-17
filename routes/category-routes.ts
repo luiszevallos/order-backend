@@ -1,60 +1,58 @@
 import { Router } from "express";
-import {
-  deleteCustomer,
-  getCustomer,
-  getCustomers,
-  postCustomer,
-  putCustomer,
-} from "../controllers/customer-controllers";
 import { check } from "express-validator";
+//
+import {
+  deleteCategory,
+  getCategory,
+  getCategories,
+  postCategory,
+  putCategory,
+} from "../controllers/category-controllers";
 import { validFields } from "../middlewares";
-import { existCustomerId } from "../helpers/db-validator";
+import { existCategoryId } from "../helpers/db-validator";
 
 const router = Router();
 
-router.get("/", getCustomers);
+router.get("/", getCategories);
 
 router.get(
   "/:id",
   [
     check("id", "No es un ID válido").isMongoId(),
-    check("id").custom(existCustomerId),
+    check("id").custom(existCategoryId),
     validFields,
   ],
-  getCustomer
+  getCategory
 );
 
 router.post(
   "/",
   [
     check("name", "Nombre es obligatorio").not().isEmpty(),
-    check("documentNumber", "Número de documento es obligatorio")
-      .not()
-      .isEmpty(),
-    check("documentType", "Tipo de documento es obligatorio").not().isEmpty(),
+    check("description", "Descripción es obligatorio").not().isEmpty(),
     validFields,
   ],
-  postCustomer
+  postCategory
 );
 
 router.put(
   "/:id",
   [
     check("id", "No es un ID válido").isMongoId(),
-    check("id").custom(existCustomerId),
+    check("id").custom(existCategoryId),
     validFields,
   ],
-  putCustomer
+  putCategory
 );
 
 router.delete(
   "/:id",
   [
     check("id", "No es un ID válido").isMongoId(),
-    check("id").custom(existCustomerId),
+    check("id").custom(existCategoryId),
     validFields,
   ],
-  deleteCustomer
+  deleteCategory
 );
 
 export default router;

@@ -54,7 +54,7 @@ export const postUser = async (req: Request, res: Response) => {
   await user.save();
 
   res.status(201).json({
-    message: "Crear usuario exitoso!",
+    message: "Creación de usuario exitoso!",
     data: {
       user,
     },

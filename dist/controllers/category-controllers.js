@@ -20,72 +20,68 @@ var __rest = (this && this.__rest) || function (s, e) {
     return t;
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.deleteCustomer = exports.putCustomer = exports.postCustomer = exports.getCustomer = exports.getCustomers = void 0;
+exports.deleteCategory = exports.putCategory = exports.postCategory = exports.getCategory = exports.getCategories = void 0;
 //
 const models_1 = require("../models");
-const getCustomers = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+const getCategories = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     const { limit = 5, page = 0 } = req.query;
     const option = {
         status: true,
     };
     const [count, rows] = yield Promise.all([
-        yield models_1.CustomerModel.countDocuments(option),
-        yield models_1.CustomerModel.find(option)
+        yield models_1.CategoryModel.countDocuments(option),
+        yield models_1.CategoryModel.find(option)
             .skip(Number(page) * Number(limit))
             .limit(Number(limit)),
     ]);
     res.json({
-        message: "Lista de clientes",
+        message: "Lista de categorías",
         data: {
             rows,
             count,
         },
     });
 });
-exports.getCustomers = getCustomers;
-const getCustomer = (req, res) => {
+exports.getCategories = getCategories;
+const getCategory = (req, res) => {
     const { id } = req.params;
-    const customer = models_1.CustomerModel.findById(id);
+    const category = models_1.CategoryModel.findById(id);
     res.json({
-        message: "Datos de cliente",
-        data: customer,
+        message: "Datos de categoría",
+        data: category,
     });
 };
-exports.getCustomer = getCustomer;
-const postCustomer = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
-    const { name, documentNumber, documentType, address } = req.body;
-    const customer = new models_1.CustomerModel({
+exports.getCategory = getCategory;
+const postCategory = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+    const { name, description } = req.body;
+    const category = new models_1.CategoryModel({
         name,
-        address,
-        document: {
-            number: documentNumber,
-            type: documentType,
-        },
+        description,
     });
-    yield customer.save();
+    yield category.save();
     res.status(201).json({
-        message: "Crear de cliente exitoso!",
-        data: customer,
+        message: "Crear de categoría exitoso!",
+        data: category,
     });
 });
-exports.postCustomer = postCustomer;
-const putCustomer = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+exports.postCategory = postCategory;
+const putCategory = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     const { id } = req.params;
     const _a = req.body, { password, email, _id } = _a, data = __rest(_a, ["password", "email", "_id"]);
-    const customer = yield models_1.CustomerModel.findByIdAndUpdate(id, data);
+    const category = yield models_1.CategoryModel.findByIdAndUpdate(id, data);
     res.json({
-        message: "cliente actualizado exitoso!",
-        data: customer,
+        message: "Categoría actualizado exitoso!",
+        data: category,
     });
 });
-exports.putCustomer = putCustomer;
-const deleteCustomer = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+exports.putCategory = putCategory;
+const deleteCategory = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     const { id } = req.params;
-    const customer = yield models_1.CustomerModel.findByIdAndUpdate(id, { status: false });
+    const category = yield models_1.CategoryModel.findByIdAndUpdate(id, { status: false });
     res.json({
-        message: "cliente eliminado",
-        data: customer,
+        message: "Categoría eliminado",
+        data: category,
     });
 });
-exports.deleteCustomer = deleteCustomer;
-//# sourceMappingURL=customer-controllers.js.map
+exports.deleteCategory = deleteCategory;
+//# sourceMappingURL=category-controllers.js.map
