@@ -1,9 +1,15 @@
 import { Schema, model } from "mongoose";
 
 const ProductSchema = new Schema({
+  category: {
+    type: Schema.Types.ObjectId,
+    ref: "Category",
+    required: [true, "La categoría es obligatoria"],
+  },
   name: {
     type: String,
     required: [true, "Nombre es obligatorio"],
+    unique: true,
   },
   description: {
     type: String,
@@ -12,15 +18,9 @@ const ProductSchema = new Schema({
   price: {
     type: Number,
     required: [true, "El precio es obligatorio"],
-    unique: true,
   },
   image: {
     type: [String],
-  },
-  category: {
-    type: Schema.Types.ObjectId,
-    ref: "Category",
-    required: [true, "La categoría es obligatoria"],
   },
   available: {
     type: Boolean,

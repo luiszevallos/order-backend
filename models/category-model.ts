@@ -4,6 +4,7 @@ const CategorySchema = new Schema({
   name: {
     type: String,
     required: [true, "Nombre es obligatorio"],
+    unique: true,
   },
   description: {
     type: String,

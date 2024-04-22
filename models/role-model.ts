@@ -8,6 +8,7 @@ const RoleSchema = new Schema({
   code: {
     type: String,
     required: [true, "Código es obligatorio"],
+    unique: true,
   },
 });
 

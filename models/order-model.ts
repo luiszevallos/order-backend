@@ -1,36 +1,27 @@
 import { Schema, model } from "mongoose";
 
-const UserSchema = new Schema({
-  name: {
-    type: String,
-    required: [true, "Nombre es obligatorio"],
-  },
-  surname: {
-    type: String,
-    required: [true, "Apellido es obligatorio"],
-  },
-  email: {
-    type: String,
-    required: [true, "Correo es obligatorio"],
+const ProductSchema = new Schema({
+  id_producto: {
+    type: Schema.Types.ObjectId,
+    ref: "Producto",
     unique: true,
   },
-  password: {
-    type: String,
-    required: [true, "Contraseña es obligatorio"],
-  },
-  image: {
-    type: String,
-  },
+  count: Number,
+  delivered: Boolean,
+});
+
+const UserSchema = new Schema({
   customer: {
     type: Schema.Types.ObjectId,
     ref: "Customer",
     required: true,
   },
-  customer: {
+  seller: {
     type: Schema.Types.ObjectId,
-    ref: "Customer",
+    ref: "User",
     required: true,
   },
+  productos: [ProductSchema],
   status: {
     type: Boolean,
     default: true,

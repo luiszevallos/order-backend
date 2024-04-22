@@ -18,13 +18,13 @@ const UserSchema = new Schema({
     type: String,
     required: [true, "Contraseña es obligatorio"],
   },
-  image: {
-    type: String,
-  },
   role: {
     type: Schema.Types.ObjectId,
     ref: "Role",
-    required: true,
+    required: [true, "El Rol es obligatorio"],
+  },
+  image: {
+    type: String,
   },
   status: {
     type: Boolean,
